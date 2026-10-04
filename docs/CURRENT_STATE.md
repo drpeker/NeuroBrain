@@ -53,3 +53,7 @@ Develop risky features in new copies and checkpoint before experiments.
 4. Add IMU/encoders and richer world state.
 5. Add motor actions behind deterministic safety control.
 6. Add persistent identity/memory independently of the replaceable LLM.
+
+
+## Complete reconstruction map
+See `docs/SYSTEM_DIAGRAMS.md` for the full end-to-end diagrams, model roles, action/vision flows, failed experiments and recovery map.

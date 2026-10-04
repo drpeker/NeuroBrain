@@ -39,3 +39,7 @@ Test in order: `/dev/video0` → OpenCV → `vision_detect_working.py` → Visio
 
 ## Engineering rule
 When a state works physically: stop → checkpoint → commit → push → experiment only in a new copy.
+
+
+## Complete reconstruction map
+See `docs/SYSTEM_DIAGRAMS.md` for the full end-to-end diagrams, model roles, action/vision flows, failed experiments and recovery map.

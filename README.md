@@ -46,12 +46,13 @@ C270 camera → OpenCV → YOLOv8n → VisionState → VisionService ───�
 ## Project Memory / Recovery
 If opened with no prior conversation context, read:
 1. [Current State](docs/CURRENT_STATE.md)
-2. [Architecture](docs/ARCHITECTURE.md)
-3. [Hardware](docs/HARDWARE.md)
-4. [Models](docs/MODELS.md)
-5. [Install / Runtime Layout](docs/INSTALL.md)
-6. [Recovery](docs/RECOVERY.md)
-7. [Design Decisions](docs/DESIGN_DECISIONS.md)
+2. [Complete System Diagrams](docs/SYSTEM_DIAGRAMS.md)
+3. [Architecture](docs/ARCHITECTURE.md)
+4. [Hardware](docs/HARDWARE.md)
+5. [Models](docs/MODELS.md)
+6. [Install / Runtime Layout](docs/INSTALL.md)
+7. [Recovery](docs/RECOVERY.md)
+8. [Design Decisions](docs/DESIGN_DECISIONS.md)
 
 These files are the durable engineering memory of NeuroBrain.
 
