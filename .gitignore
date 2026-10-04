@@ -1,0 +1,13 @@
+venv/
+models/
+tts/*.onnx
+tts/*.onnx.json
+*.gguf
+*.bin
+*.wav
+*.log
+__pycache__/
+*.pyc
+
+llama.cpp/
+start_neurobrain.sh
