@@ -1,57 +1,65 @@
 # NeuroBrain
 
-NeuroBrain is a local AI voice and robotics project running on a Raspberry Pi 4.
+NeuroBrain is a fully local AI voice, vision and robotics platform running on a Raspberry Pi 4.
 
-## Current Stable Version
-
-NeuroBrain v1 combines three local AI components:
-
-- Whisper.cpp for speech-to-text
-- Qwen3 1.7B for language processing
-- Piper for text-to-speech
+## Current Working Checkpoint
+`fe85f97` — working voice + vision + safe GPIO integration.
 
 ## Architecture
+```text
+C270 microphone → Whisper Tiny Q4 ─┐
+                                   ├→ NeuroBrain Core → actions/chat/vision → Piper → speaker
+C270 camera → OpenCV → YOLOv8n → VisionState → VisionService ───────────────┘
+                                   ↑
+                            Qwen3 1.7B router/chat
+```
 
-Microphone -> Whisper STT -> Qwen3 LLM -> Piper TTS -> Speaker
-
-All inference runs locally on the Raspberry Pi.
+## AI Components
+- Whisper.cpp — speech-to-text.
+- YOLOv8n via NCNN — real-time object detection.
+- Qwen3 1.7B Q4 — semantic intent routing and conversation.
+- Piper — neural text-to-speech.
 
 ## Hardware
+- Raspberry Pi 4, 4 GB RAM.
+- Logitech C270 camera + microphone.
+- Speaker/audio output.
+- LED on authorized BCM GPIO17.
 
-- Raspberry Pi 4 (4 GB RAM)
-- Logitech C270 USB webcam and microphone
-- Speaker / audio output
-- GPIO available for future sensors and motor control
+## Working Features
+- Local English speech recognition and conversation.
+- Safe GPIO17 READ / SET / TOGGLE.
+- Live C270 multi-object detection.
+- Bounding boxes + NMS.
+- Temporal VisionState stabilization.
+- Thread-safe VisionService.
+- Background VisionRuntime.
+- Spoken “What do you see?” queries.
+- Local Piper speech output.
 
-## Current Features
+## Start
+```bash
+/home/drpeker/neurobrain/venv/bin/python \
+  /home/drpeker/neurobrain/start_neurobrain_vision_dev.py
+```
 
-- Automatic voice activity detection
-- Local English speech recognition
-- Local Qwen3 1.7B language model
-- Local Piper speech synthesis
-- Resident Whisper and Qwen servers
-- Fully local voice conversation
+## Project Memory / Recovery
+If opened with no prior conversation context, read:
+1. [Current State](docs/CURRENT_STATE.md)
+2. [Architecture](docs/ARCHITECTURE.md)
+3. [Hardware](docs/HARDWARE.md)
+4. [Models](docs/MODELS.md)
+5. [Install / Runtime Layout](docs/INSTALL.md)
+6. [Recovery](docs/RECOVERY.md)
+7. [Design Decisions](docs/DESIGN_DECISIONS.md)
 
-## Main Programs
+These files are the durable engineering memory of NeuroBrain.
 
-- neurobrain.py - main voice interaction loop
-- start_neurobrain.py - launches NeuroBrain and resident AI servers
-- neurobrain_stable_v1.py - stable v1 checkpoint
-- start_neurobrain_stable_v1.py - stable v1 launcher
-
-## Start NeuroBrain
-
-    source /home/drpeker/neurobrain/venv/bin/activate
-    python /home/drpeker/neurobrain/start_neurobrain.py
+## Safety Principle
+The LLM does not directly control GPIO or motors. Physical actions pass through deterministic Core validation and hardware-control code.
 
 ## Repository Policy
-
-Large AI models and runtime files are intentionally excluded from GitHub. GGUF models, Whisper models, Piper ONNX voices, llama.cpp, the Python virtual environment, WAV files, and logs must be installed or restored separately.
+Large AI models and runtime artifacts are excluded from GitHub and must be restored separately.
 
 ## Roadmap
-
-Planned development includes conversation memory, hardware-state awareness, wake-word detection, GPIO sensors, motor control, camera vision, obstacle detection, autonomous navigation, and persistent robot identity.
-
-## Goal
-
-The goal of NeuroBrain is to create a self-contained robot intelligence platform combining local language AI with vision, sensors, and physical motor control without requiring cloud AI services.
+Faster routing; real ToF/ultrasonic range; IMU/encoders; safe motor control; fused world state; persistent identity/memory; autonomous navigation.
