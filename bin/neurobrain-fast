@@ -1,0 +1,3 @@
+#!/bin/bash
+# NeuroBrain fast version (branch neurobrain-fast)
+exec /home/drpeker/neurobrain/venv/bin/python /home/drpeker/neurobrain/start_neurobrain_fast.py "$@"

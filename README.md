@@ -39,12 +39,32 @@ C270 camera → OpenCV → YOLOv8n → VisionState → VisionService ───�
 
 ## Start
 ```bash
-/home/drpeker/neurobrain/venv/bin/python \
-  /home/drpeker/neurobrain/start_neurobrain_vision_dev.py
+neurobrain          # fast version (branch neurobrain-fast)
+neurobrain-legacy   # original version
 ```
+
+Without the launcher scripts:
+```bash
+/home/drpeker/neurobrain/venv/bin/python /home/drpeker/neurobrain/start_neurobrain_fast.py
+/home/drpeker/neurobrain/venv/bin/python /home/drpeker/neurobrain/start_neurobrain_vision_dev.py
+```
+
+## NeuroBrain Fast
+The `neurobrain-fast` branch adds a faster runtime next to the original files. The hardware, Qwen3 1.7B and the
+safety boundary are the same:
+
+- LED / GPIO 17 and "What do you see?" are recognised by a keyword router, without the LLM: answered right after
+  speech recognition instead of after a 5–45 s Qwen router call.
+- Chat answers are streamed and spoken sentence by sentence; the first words come after about 3–5 s instead of 9–47 s.
+- YOLO runs on one core and pauses while NeuroBrain answers, so Qwen generates 3.1 instead of 1.4 tokens/s.
+- Whisper base Q5_0, greedy, 10 s window: more accurate and faster than the old tiny + beam search setup.
+- Physical commands are only executed when Whisper is confident; unclear speech is asked again.
+
+How to run it, what changed and diagrams of how it works: **[docs/NEUROBRAIN_FAST.md](docs/NEUROBRAIN_FAST.md)**.
 
 ## Project Memory / Recovery
 If opened with no prior conversation context, read:
+0. [NeuroBrain Fast](docs/NEUROBRAIN_FAST.md) (branch `neurobrain-fast`)
 1. [Current State](docs/CURRENT_STATE.md)
 2. [Complete System Diagrams](docs/SYSTEM_DIAGRAMS.md)
 3. [Architecture](docs/ARCHITECTURE.md)
@@ -63,4 +83,4 @@ The LLM does not directly control GPIO or motors. Physical actions pass through 
 Large AI models and runtime artifacts are excluded from GitHub and must be restored separately.
 
 ## Roadmap
-Faster routing; real ToF/ultrasonic range; IMU/encoders; safe motor control; fused world state; persistent identity/memory; autonomous navigation.
+Real ToF/ultrasonic range; IMU/encoders; safe motor control; fused world state; persistent identity/memory; autonomous navigation.

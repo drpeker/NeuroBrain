@@ -1,0 +1,3 @@
+#!/bin/bash
+# Original NeuroBrain (vision dev version)
+exec /home/drpeker/neurobrain/venv/bin/python /home/drpeker/neurobrain/start_neurobrain_vision_dev.py "$@"
